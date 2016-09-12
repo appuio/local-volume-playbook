@@ -1,0 +1,8 @@
+---
+
+local_vg: vg_gluster
+local_pvs:
+  - name: local-pv1
+    size: 1G
+  - name: local-pv2
+    size: 3G
