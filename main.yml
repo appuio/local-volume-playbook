@@ -2,15 +2,15 @@
 - hosts: local
   tasks:
   - name: Create logical volumes
-    lvol: vg=vg_gluster lv={{ item.name }} size={{ item.size }}
+    lvol: vg={{ local_vg }} lv={{ item.name }} size={{ item.size }}
     with_items: "{{ local_pvs }}"
 
   - name: Create backing filesystems
-    filesystem: fstype=xfs dev=/dev/vg_gluster/{{ item.name }} opts='-i size=512'
+    filesystem: fstype=xfs dev=/dev/{{ local_vg }}/{{ item.name }} opts='-i size=512'
     with_items: "{{ local_pvs }}"
 
   - name: Mount backing filesystems
-    mount: name=/data/{{ item.name }} src=/dev/vg_gluster/{{ item.name }} fstype=xfs state=mounted
+    mount: name=/data/{{ item.name }} src=/dev/{{ local_vg }}/{{ item.name }} fstype=xfs state=mounted
     with_items: "{{ local_pvs }}"
 
   - name: Set backing filesystem permissions
