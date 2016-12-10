@@ -1,6 +1,6 @@
 [all:vars]
 ansible_ssh_user=ansible
-ansible_sudo=true
+ansible_become=true
 
 [local]
 origin-node1.example.com
